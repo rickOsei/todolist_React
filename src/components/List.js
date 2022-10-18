@@ -10,23 +10,34 @@ import {
 function List({ allTask, deleteTask }) {
   return (
     <ul className="task_section">
-      {allTask.map(({ Task, id }) => {
+      {allTask.map(({ Task, id, completed }) => {
         return (
-          <RenderedList key={id} deleteTask={deleteTask} Task={Task} id={id} />
+          <RenderedList
+            key={id}
+            deleteTask={deleteTask}
+            Task={Task}
+            id={id}
+            completed={completed}
+          />
         );
       })}
     </ul>
   );
 }
 
-const RenderedList = ({ deleteTask, Task, id }) => {
+const RenderedList = ({ deleteTask, Task, id, completed }) => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [modal, setModal] = useState(false);
   const [edited, setEdited] = useState(Task);
 
-  const completedFunc = () => {
+  const completedFunc = async () => {
     setIsCompleted((prev) => !prev);
+    const TaskRef = doc(db, "list", id);
+
+    await updateDoc(TaskRef, {
+      completed: completed === true ? false : true,
+    });
   };
 
   const deletedFunc = async () => {
@@ -34,15 +45,11 @@ const RenderedList = ({ deleteTask, Task, id }) => {
     console.log(Task);
 
     await deleteDoc(doc(db, "list", id));
-
-    // setTimeout( () => {
-    //   // deleteTask(id);
-    // }, 1500);
   };
 
   const editedFunc = async () => {
-    const washingtonRef = doc(db, "list", id);
-    await updateDoc(washingtonRef, {
+    const TaskRef = doc(db, "list", id);
+    await updateDoc(TaskRef, {
       Task: edited,
     });
   };
@@ -50,7 +57,7 @@ const RenderedList = ({ deleteTask, Task, id }) => {
   return (
     <>
       <li className={isDeleted ? "move task" : "task"}>
-        <p className={isCompleted ? "completed task_name" : "task_name"}>
+        <p className={completed ? "completed task_name" : "task_name"}>
           {Task}
         </p>
 

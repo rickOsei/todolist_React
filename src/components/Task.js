@@ -10,6 +10,7 @@ function Task({ addItems }) {
     setTask((prev) => ({
       ...prev,
       id: new Date().getTime().toLocaleString(),
+      completed: false,
       [name]: value,
     }));
   };
