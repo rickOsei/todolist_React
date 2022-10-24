@@ -9,7 +9,8 @@
 }
 
 body {
-  background: #36a4f9;
+  /* background: #36a4f9; */
+  background: linear-gradient(120deg, rgba(2, 28, 53, 0.937), rgb(26, 34, 36));
 }
 
 .main {
@@ -43,8 +44,6 @@ body {
 
 .input_section {
   width: 100%;
-  /* display: grid;
-  grid-template-columns: 4fr, 1fr; */
   display: flex;
   justify-content: space-between;
 }
@@ -79,7 +78,6 @@ input {
 .btn_add:hover {
   background-color: rgba(0, 140, 255, 0.601);
   color: rgb(255, 255, 255);
-  /* box-shadow: -1px -1px 1px 1px rgba(0, 0, 0, 0.322); */
 }
 
 .task_section {
@@ -96,7 +94,7 @@ input {
   height: 40px;
   padding: 10px;
   border-radius: 5px;
-  background: rgb(210, 247, 255);
+  background: rgb(190, 242, 254);
   margin-top: 20px;
 
   font-size: 16px;
@@ -107,6 +105,7 @@ input {
   width: 65px;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .task p {

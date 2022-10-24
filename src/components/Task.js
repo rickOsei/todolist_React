@@ -28,7 +28,7 @@ function Task({ addItems }) {
     if (!task.Task) return;
     // addItems(task);
     await setDoc(doc(db, "list", task.id), task);
-    setTask({});
+    setTask({ Task: "" });
   };
 
   return (
